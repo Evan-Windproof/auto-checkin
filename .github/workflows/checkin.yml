@@ -1,0 +1,30 @@
+name: 自动签到
+
+on:
+  schedule:
+    # 每天早上8点（北京时间）
+    # UTC时间 = 北京时间 - 8小时
+    # 北京时间8点 = UTC时间0点
+    - cron: '0 0 * * *'
+  
+  # 允许手动触发（可选）
+  workflow_dispatch:
+
+jobs:
+  checkin:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v3
+    
+    - name: 设置Python环境
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: 安装依赖
+      run: pip install -r requirements.txt
+    
+    - name: 运行签到脚本
+      run: python checkin.py
