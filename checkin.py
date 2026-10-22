@@ -24,14 +24,23 @@ try:
     
     # 检查是否有滑块验证
     try:
+        element = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "geetest_captcha_7f2cfd30 geetest_captcha geetest_float geetest_customTheme geetest_dark geetest_boxShow geetest_freeze_wait"))
+        )
+
+        element.click()
+
+        import time
+        time.sleep(3)
+
         print(f"[{datetime.now()}] 检查滑块验证...")
         slider_block = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, "nc_iconfont"))
         )
         
         # 找到滑块和滑块容器
-        slider_container = driver.find_element(By.CLASS_NAME, "nc_outer")
-        slider_track = driver.find_element(By.CLASS_NAME, "nc_track")
+        slider_container = driver.find_element(By.CLASS_NAME, "geetest_captcha_7f2cfd30 geetest_captcha geetest_float geetest_customTheme geetest_dark geetest_freeze_wait geetest_load")
+        slider_track = driver.find_element(By.CLASS_NAME, "background-image: url(&quot;https://static.geetest.com/pictures/v4_pic/slide_2021_07_14/color4/bg/851096ab2f814419aea0148868d53949.png&quot")
         
         # 获取滑块和轨道的宽度
         track_width = slider_track.size['width']
